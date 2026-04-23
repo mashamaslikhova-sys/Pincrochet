@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="pattern-page">
+    <div class="pattern-header">
+        <img src="{{ pattern.image }}" alt="{{ pattern.title }}">
+        <div class="pattern-header-info">
+            <h1>{{ pattern.title }}</h1>
+            <div class="pattern-tags">
+                {% for t in pattern.tags %}
+                    <a class="tag" href="{{ url_for('index') }}?tag={{ t }}">{{ t }}</a>
+                {% endfor %}
+            </div>
+            {% if current_user.is_authenticated %}
+                <a class="btn-save" href="{{ url_for('save', id=pattern.id) }}">Сохранить в подборки</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="pattern-description">
+        {% set paragraphs = pattern.description.split('\n\n') %}
+        {% for para in paragraphs %}
+            {% if para.strip() %}
+                {% if para.startswith('МАТЕРИАЛЫ') or para.startswith('СОКРАЩЕНИЯ') or para.startswith('ТЕЛО') or para.startswith('ВЕРХНИЙ ПЛАВНИК') or para.startswith('БОКОВЫЕ ПЛАВНИКИ') or para.startswith('ХВОСТ') or para.startswith('ЗАПЛАТКИ') %}
+                    <div class="pattern-section">
+                        <h2>{{ para.split('\n')[0] }}</h2>
+                        <pre class="pattern-content">{{ para.replace(para.split('\n')[0], '').strip() }}</pre>
+                    </div>
+                {% else %}
+                    <div class="pattern-card">
+                        <pre class="pattern-pre">{{ para.strip() }}</pre>
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.pattern-page {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.pattern-header {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+.pattern-header img {
+    max-width: 280px;
+    width: 100%;
+    border-radius: 16px;
+    object-fit: cover;
+}
+
+.pattern-header-info {
+    flex: 1;
+}
+
+.pattern-header-info h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0d47a1;
+    margin-bottom: 12px;
+}
+
+.pattern-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.pattern-tags .tag {
+    background: #e3f2fd;
+    color: #1e88e5;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.btn-save {
+    display: inline-block;
+    background: #1e88e5;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.btn-save:hover {
+    background: #0d47a1;
+    transform: translateY(-2px);
+}
+
+.pattern-description {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.pattern-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.pattern-section {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.pattern-section h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1e88e5;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e3f2fd;
+}
+
+.pattern-content, .pattern-pre {
+    font-family: 'Inter', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #333;
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin: 0;
+}
+
+/* Для списков внутри описания */
+.pattern-card p {
+    margin: 0 0 10px 0;
+    line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+    .pattern-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .pattern-header img {
+        max-width: 100%;
+    }
+    .pattern-header-info h1 {
+        font-size: 24px;
+    }
+}
+</style>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="page-title">Мои подборки</h2>
+{% if saved %}
+  <div class="profile-grid">
+    {% for p in saved %}
+      <div class="profile-card">
+        <a href="{{ url_for('pattern', id=p.id) }}"><img src="{{ p.image }}" alt="{{ p.title }}"></a>
+        <div style="padding-top:8px"><strong>{{ p.title }}</strong></div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>У вас пока нет сохранённых схем.</p>
+{% endif %}
+{% endblock %}
+

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="masonry">
+  {% for p in patterns %}
+  <div class="card">
+    <a class="card-link" href="{{ url_for('pattern', id=p.id) }}">
+      <div class="card-img">
+        <img src="{{ p.image }}" alt="{{ p.title }}" loading="lazy">
+      </div>
+    </a>
+    <div class="tags">
+      {% for t in p.tags %}
+        <a class="tag" href="{{ url_for('index') }}?tag={{ t }}">{{ t }}</a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

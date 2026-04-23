@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="about-page">
+    <h1>О проекте Pincrochet</h1>
+    
+    <div class="about-card">
+        <h2>Автор</h2>
+        <p>Маслихова Мария Игоревна, 11 «Б» класс</p>
+    </div>
+
+    <div class="about-card">
+        <h2>Цель проекта</h2>
+        <p>Создать удобный и интуитивно понятный сайт со схемами для любителей вязать, а также с объяснением основ вязания для новичков.</p>
+    </div>
+
+    <div class="about-card">
+        <h2>Задачи</h2>
+        <ul>
+            <li>Спроектировать интерфейс с фотографиями готовых проектов и их схемами</li>
+            <li>Разработать серверную часть с базой данных</li>
+            <li>Реализовать поиск по сайту и сохранение подборок</li>
+            <li>Обеспечить регистрацию пользователей</li>
+        </ul>
+    </div>
+
+    <div class="about-card">
+        <h2>Технологии</h2>
+        <p>Python, Flask, HTML, CSS, JavaScript, SQLite, Figma, VS Code, GitHub</p>
+    </div>
+
+    <div class="about-card">
+        <h2>Статистика</h2>
+        <p>На сайте опубликовано {{ total_patterns }} схем</p>
+    </div>
+
+    <div class="about-card">
+        <h2>Планы по развитию</h2>
+        <ul>
+            <li>Добавление комментариев и рейтинга схем</li>
+            <li>Возможность загружать свои схемы</li>
+            <li>Система рекомендаций</li>
+            <li>Мобильное приложение</li>
+        </ul>
+    </div>
+</div>
+
+<style>
+.about-page {
+    max-width: 800px;
+    margin: 0 auto;
+}
+.about-page h1 {
+    font-size: 32px;
+    margin-bottom: 24px;
+    color: #0d47a1;
+}
+.about-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.about-card h2 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #1e88e5;
+}
+.about-card p, .about-card li {
+    color: #555;
+    line-height: 1.5;
+}
+.about-card ul {
+    padding-left: 20px;
+}
+.about-card li {
+    margin: 8px 0;
+}
+</style>
+{% endblock %}

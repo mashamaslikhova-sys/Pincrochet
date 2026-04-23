@@ -1,0 +1,424 @@
+/* ЯВНЫЕ ЦВЕТА - гарантированно работают */
+:root {
+    --bg: #eef2f7;
+    --card: #ffffff;
+    --accent: #6ea8fe;
+    --accent-dark: #4c8fd9;
+    --beige: #f5efe6;
+    --beige-dark: #e6d5b8;
+    --muted: #8b9eb0;
+    --text: #2c3e50;
+    --shadow: 0 4px 12px rgba(0,0,0,0.08);
+    --shadow-hover: 0 12px 24px rgba(0,0,0,0.12);
+    --radius: 14px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #eef2f7 !important;
+    font-family: -apple-system, 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    color: #2c3e50;
+}
+
+/* Header с бежевым фоном */
+.site-header {
+    background: #f5efe6 !important;
+    border-bottom: 1px solid #e6d5b8;
+    padding: 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.site-header .container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Логотип */
+.logo {
+    font-size: 26px;
+    font-weight: 800;
+    text-decoration: none;
+    color: #4c8fd9 !important;
+    background: none;
+    white-space: nowrap;
+}
+
+.logo:hover {
+    color: #6ea8fe !important;
+}
+
+/* Поиск */
+.search {
+    flex: 1;
+    max-width: 500px;
+    position: relative;
+}
+
+.search input {
+    width: 100%;
+    padding: 12px 20px;
+    border: 2px solid #e6d5b8;
+    border-radius: 50px;
+    font-size: 15px;
+    background: white;
+    outline: none;
+}
+
+.search input:focus {
+    border-color: #6ea8fe;
+}
+
+.search button {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 7px 20px;
+    background: #6ea8fe;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.search button:hover {
+    background: #4c8fd9;
+}
+
+/* Навигация */
+.nav {
+    display: flex;
+    gap: 12px;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #2c3e50;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-weight: 500;
+}
+
+.nav a:hover {
+    background: #e6d5b8;
+    color: #4c8fd9;
+}
+
+/* Сообщения */
+.flashes {
+    list-style: none;
+    margin-bottom: 24px;
+}
+
+.flashes li {
+    padding: 12px 20px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+}
+
+.flashes li.success {
+    background: #d4edda;
+    color: #155724;
+    border-left: 4px solid #28a745;
+}
+
+.flashes li.error {
+    background: #f8d7da;
+    color: #721c24;
+    border-left: 4px solid #dc3545;
+}
+
+/* MASONRY GRID */
+.masonry {
+    column-count: 4;
+    column-gap: 20px;
+}
+
+@media (max-width: 1200px) {
+    .masonry { column-count: 3; }
+}
+
+@media (max-width: 900px) {
+    .masonry { column-count: 2; }
+}
+
+@media (max-width: 600px) {
+    .masonry { column-count: 1; }
+}
+
+/* КАРТОЧКИ - Pinterest стиль */
+.card {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 20px;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: all 0.2s ease;
+    break-inside: avoid;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(0,0,0,0.12);
+}
+
+/* Контейнер для фото с затемнением */
+.card-media {
+    position: relative;
+    overflow: hidden;
+    background: #f5efe6;
+}
+
+.card-media img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* ЗАТЕМНЕНИЕ ПРИ НАВЕДЕНИИ */
+.card-media::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.card:hover .card-media::after {
+    background: rgba(0, 0, 0, 0.35);
+}
+
+/* Увеличение фото */
+.card:hover .card-media img {
+    transform: scale(1.05);
+}
+
+/* Тело карточки */
+.card-body {
+    padding: 14px;
+    background: white;
+}
+
+.card-body h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 6px;
+    color: #2c3e50;
+}
+
+.card-body p {
+    font-size: 13px;
+    color: #8b9eb0;
+    margin: 0 0 10px;
+    line-height: 1.4;
+}
+
+/* Теги */
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 10px 0;
+}
+
+.tag {
+    display: inline-block;
+    padding: 4px 10px;
+    background: #eef2f7;
+    color: #4c8fd9;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 500;
+    border-radius: 50px;
+    transition: all 0.2s;
+}
+
+.tag:hover {
+    background: #6ea8fe;
+    color: white;
+}
+
+/* Кнопки */
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:first-child {
+    background: #6ea8fe;
+    color: white;
+}
+
+.btn:first-child:hover {
+    background: #4c8fd9;
+    transform: translateY(-2px);
+}
+
+.btn.secondary {
+    background: #f5efe6;
+    color: #4c8fd9;
+}
+
+.btn.secondary:hover {
+    background: #e6d5b8;
+    transform: translateY(-2px);
+}
+
+/* Страница паттерна */
+.pattern {
+    display: flex;
+    gap: 32px;
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.pattern img {
+    max-width: 400px;
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.pattern-info h2 {
+    font-size: 28px;
+    margin-bottom: 16px;
+    color: #2c3e50;
+}
+
+.pattern-info p {
+    font-size: 16px;
+    color: #8b9eb0;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Формы */
+form {
+    max-width: 450px;
+    margin: 0 auto;
+    background: white;
+    padding: 32px;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+form h2 {
+    margin-bottom: 24px;
+    text-align: center;
+    color: #2c3e50;
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e6d5b8;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+form input:focus {
+    outline: none;
+    border-color: #6ea8fe;
+}
+
+form input[type="submit"] {
+    background: #6ea8fe;
+    color: white;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background: #4c8fd9;
+}
+
+/* Профиль */
+.profile-header {
+    background: #f5efe6;
+    padding: 40px;
+    border-radius: 20px;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.profile-header h2 {
+    font-size: 32px;
+    color: #2c3e50;
+}
+
+/* Пустое состояние */
+.empty-state {
+    text-align: center;
+    padding: 60px;
+    background: white;
+    border-radius: 20px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .site-header .container {
+        flex-direction: column;
+    }
+    
+    .search {
+        max-width: 100%;
+    }
+    
+    .pattern {
+        flex-direction: column;
+        padding: 20px;
+    }
+    
+    .pattern img {
+        max-width: 100%;
+    }
+}
